@@ -9,7 +9,9 @@ To make it easy for you to get started with Github, here's a list of recommended
 1. [Setup](#setup)
 2. [Commands](#commands)
 3. [Contract Compile](#contract-compile)
-4. [Deploy On Local Network](#deploy-on-local-network)
+4. [Truffle Config file](#truffle-config-file)
+5. [Deploy On Local Network](#deploy-on-local-network)
+6. [Deploy On Testnet Network](#deploy-on-testnet-network)
 
 ## Setup
 
@@ -31,6 +33,8 @@ You'll need node, npm and the Truffle Suite to set up the development environmen
 NAME=<Place your ERC20 Token Name here>
 SYMBOL=<Place your ERC20 Token Symbol here>
 TOKENPRICE=<Place your ERC20 Token Price here>
+MNEMONIC=<Place your Ethereum address seed phrase here>
+KEY=<Place your API key here>
 ```
 
 ## Commands
@@ -53,7 +57,69 @@ TOKENPRICE=<Place your ERC20 Token Price here>
   ```console
     truffle compile --all
   ```
-  
+
+## Truffle Config File
+
+This file would use your Mnemonic key and PolygonScan API KEY to deploy the smart contracts on local network as well Polygon and Test Network. 
+These values will be picked up either from .env file explained above or the environment variables of the host system.
+
+```js
+require('dotenv').config()
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const mnemonic = process.env.MNEMONIC;
+const KEY = process.env.KEY;
+module.exports = {
+
+  networks: {
+
+    test: {
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 8545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+    },
+
+    mumbai: {
+      provider: () =>
+        new HDWalletProvider(
+          mnemonic,
+          `https://matic-mumbai.chainstacklabs.com/`
+        ),
+      network_id: 80001,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
+
+    compilers: {
+      solc: {
+        version: "0.8.7",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200
+          }
+        }
+      }
+    },
+
+    mocha: {
+      enableTimeouts: false,
+      before_timeout: 300000
+    },
+
+    plugins: [
+      "solidity-coverage",
+      "truffle-plugin-verify"
+    ],
+
+    api_keys: {
+      polygonscan: KEY
+    }
+  }
+};
+
+```
+
+
 ## Deploy On Local Network
 
 Network Name - test
@@ -77,6 +143,18 @@ Network Name - test
     `truffle test --network test`
 
     - This will use the test/ERC20Token.test.js file and test the ERC20Token contract.
+
+## Deploy On Testnet Network
+
+Network Name - mumbai
+
+- To migrate the contracts 
+
+    `truffle migrate --network mumbai`
+
+    - This will use the migrations/2_migrate_ERC20.js file and deploy the RolaCoaster contract.
+
+        This file would use your NAME, SYMBOL and TOKENPRICE  fields from .env file and pass to the smart contract.
     
 ## Test Case Coverage
 
@@ -95,4 +173,14 @@ File              |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
 All files         |      100 |    90.91 |      100 |      100 |                |
 
 
- 
+
+## Surya graph report
+
+Surya is an utility tool for smart contract systems. It provides a number of visual outputs and information about the contracts' structure. Also supports querying the function call graph in multiple ways to aid in the manual inspection of contracts.
+
+- Graph of ERC20Token contract
+<img src="./surya_report.svg">
+
+- Graph of Inheritance report
+
+<img src="./surya_inheritance_report.svg">

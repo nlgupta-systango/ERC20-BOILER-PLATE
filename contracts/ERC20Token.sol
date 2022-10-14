@@ -16,7 +16,6 @@ import "./BlackList.sol";
 
 contract ERC20Token is ERC20, Pausable, Ownable, IERC20Token, BlackList{
     
-  
     /**
         @notice Price of ERC20 Token
      */
