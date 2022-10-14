@@ -1,0 +1,666 @@
+{
+  "contractName": "IERC20Token",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "airDrop",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "blackListAddress",
+          "type": "address"
+        }
+      ],
+      "name": "addToBlackList",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "blackListAddress",
+          "type": "address"
+        }
+      ],
+      "name": "removeFromBlackList",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenPrice",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateTokenPrice",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unpause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.7+commit.e28d00a7\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"blackListAddress\",\"type\":\"address\"}],\"name\":\"addToBlackList\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"airDrop\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"blackListAddress\",\"type\":\"address\"}],\"name\":\"removeFromBlackList\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tokenPrice\",\"type\":\"uint256\"}],\"name\":\"updateTokenPrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Interface of the ERC20Token implementation.\",\"kind\":\"dev\",\"methods\":{\"addToBlackList(address)\":{\"details\":\"Adds the account to blacklist\"},\"airDrop(address,uint256)\":{\"details\":\"Owner can airdrop the ERC20 tokens to users\"},\"mint(address,uint256)\":{\"details\":\"Mint the ERC20 token to given address\"},\"pause()\":{\"details\":\"Pause the contract\"},\"removeFromBlackList(address)\":{\"details\":\"Removes the account from blacklist\"},\"unpause()\":{\"details\":\"Unpause the contract\"},\"updateTokenPrice(uint256)\":{\"details\":\"update the token price \"},\"withdraw()\":{\"details\":\"Withdraw all the ethers of contract to owner\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IERC20Token.sol\":\"IERC20Token\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IERC20Token.sol\":{\"keccak256\":\"0xcbe351e0dbfa570cd6ed3a336dac73513f0ea63500bf5db2f077e1dc600154d1\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://9391c99148b40983b433013f26eb5f152fe99f1a2d8abd25a6ac70eb49e63843\",\"dweb:/ipfs/Qmactfyygkaj5q6Y9ndhHriFru9x5eXwKaw5ccLyMFZ2dN\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.7;\n\n/**\n * @dev Interface of the ERC20Token implementation.\n */\n\ninterface IERC20Token{\n\n    /**\n     * @dev Mint the ERC20 token to given address\n     */\n    function mint(address to, uint256 amount) external payable; \n\n    /**\n     * @dev Owner can airdrop the ERC20 tokens to users\n     */\n    function airDrop(address to,uint256 amount) external;\n\n    /**\n     * @dev Withdraw all the ethers of contract to owner\n     */\n    function withdraw() external;\n\n    /**\n     * @dev Adds the account to blacklist\n     */\n    function addToBlackList(address blackListAddress) external;\n\n    /**\n     * @dev Removes the account from blacklist\n     */\n    function removeFromBlackList(address blackListAddress) external;\n\n    /**\n     * @dev update the token price \n     */\n    function updateTokenPrice(uint256 _tokenPrice) external;\n\n    /**\n     * @dev Pause the contract\n     */\n    function pause() external;\n\n    /**\n     * @dev Unpause the contract\n     */\n    function unpause() external;\n}\n",
+  "sourcePath": "/home/ubox141/Desktop/Blockchain Work'/ERC20-BoilerPlate/contracts/IERC20Token.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/IERC20Token.sol",
+    "exportedSymbols": {
+      "IERC20Token": [
+        1298
+      ]
+    },
+    "id": 1299,
+    "license": "UNLICENSED",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1250,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".7"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "39:23:8"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 1251,
+          "nodeType": "StructuredDocumentation",
+          "src": "64:59:8",
+          "text": " @dev Interface of the ERC20Token implementation."
+        },
+        "fullyImplemented": false,
+        "id": 1298,
+        "linearizedBaseContracts": [
+          1298
+        ],
+        "name": "IERC20Token",
+        "nameLocation": "135:11:8",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "documentation": {
+              "id": 1252,
+              "nodeType": "StructuredDocumentation",
+              "src": "153:61:8",
+              "text": " @dev Mint the ERC20 token to given address"
+            },
+            "functionSelector": "40c10f19",
+            "id": 1259,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "mint",
+            "nameLocation": "228:4:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1257,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1254,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "241:2:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1259,
+                  "src": "233:10:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1253,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "233:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1256,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "253:6:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1259,
+                  "src": "245:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1255,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "245:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "232:28:8"
+            },
+            "returnParameters": {
+              "id": 1258,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "277:0:8"
+            },
+            "scope": 1298,
+            "src": "219:59:8",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1260,
+              "nodeType": "StructuredDocumentation",
+              "src": "285:67:8",
+              "text": " @dev Owner can airdrop the ERC20 tokens to users"
+            },
+            "functionSelector": "045f7850",
+            "id": 1267,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "airDrop",
+            "nameLocation": "366:7:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1265,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1262,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "382:2:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1267,
+                  "src": "374:10:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1261,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "374:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1264,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "393:6:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1267,
+                  "src": "385:14:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1263,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "385:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "373:27:8"
+            },
+            "returnParameters": {
+              "id": 1266,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "409:0:8"
+            },
+            "scope": 1298,
+            "src": "357:53:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1268,
+              "nodeType": "StructuredDocumentation",
+              "src": "416:68:8",
+              "text": " @dev Withdraw all the ethers of contract to owner"
+            },
+            "functionSelector": "3ccfd60b",
+            "id": 1271,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdraw",
+            "nameLocation": "498:8:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1269,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "506:2:8"
+            },
+            "returnParameters": {
+              "id": 1270,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "517:0:8"
+            },
+            "scope": 1298,
+            "src": "489:29:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1272,
+              "nodeType": "StructuredDocumentation",
+              "src": "524:53:8",
+              "text": " @dev Adds the account to blacklist"
+            },
+            "functionSelector": "417c73a7",
+            "id": 1277,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addToBlackList",
+            "nameLocation": "591:14:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1275,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1274,
+                  "mutability": "mutable",
+                  "name": "blackListAddress",
+                  "nameLocation": "614:16:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1277,
+                  "src": "606:24:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1273,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "606:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "605:26:8"
+            },
+            "returnParameters": {
+              "id": 1276,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "640:0:8"
+            },
+            "scope": 1298,
+            "src": "582:59:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1278,
+              "nodeType": "StructuredDocumentation",
+              "src": "647:58:8",
+              "text": " @dev Removes the account from blacklist"
+            },
+            "functionSelector": "4a49ac4c",
+            "id": 1283,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeFromBlackList",
+            "nameLocation": "719:19:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1281,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1280,
+                  "mutability": "mutable",
+                  "name": "blackListAddress",
+                  "nameLocation": "747:16:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1283,
+                  "src": "739:24:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1279,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "739:7:8",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "738:26:8"
+            },
+            "returnParameters": {
+              "id": 1282,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "773:0:8"
+            },
+            "scope": 1298,
+            "src": "710:64:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1284,
+              "nodeType": "StructuredDocumentation",
+              "src": "780:47:8",
+              "text": " @dev update the token price "
+            },
+            "functionSelector": "676c0d77",
+            "id": 1289,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "updateTokenPrice",
+            "nameLocation": "841:16:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1287,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1286,
+                  "mutability": "mutable",
+                  "name": "_tokenPrice",
+                  "nameLocation": "866:11:8",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1289,
+                  "src": "858:19:8",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1285,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "858:7:8",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "857:21:8"
+            },
+            "returnParameters": {
+              "id": 1288,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "887:0:8"
+            },
+            "scope": 1298,
+            "src": "832:56:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1290,
+              "nodeType": "StructuredDocumentation",
+              "src": "894:42:8",
+              "text": " @dev Pause the contract"
+            },
+            "functionSelector": "8456cb59",
+            "id": 1293,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pause",
+            "nameLocation": "950:5:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1291,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "955:2:8"
+            },
+            "returnParameters": {
+              "id": 1292,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "966:0:8"
+            },
+            "scope": 1298,
+            "src": "941:26:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1294,
+              "nodeType": "StructuredDocumentation",
+              "src": "973:44:8",
+              "text": " @dev Unpause the contract"
+            },
+            "functionSelector": "3f4ba83a",
+            "id": 1297,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "unpause",
+            "nameLocation": "1031:7:8",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1295,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1038:2:8"
+            },
+            "returnParameters": {
+              "id": 1296,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1049:0:8"
+            },
+            "scope": 1298,
+            "src": "1022:28:8",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1299,
+        "src": "125:927:8",
+        "usedErrors": []
+      }
+    ],
+    "src": "39:1014:8"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.7+commit.e28d00a7.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.7",
+  "updatedAt": "2022-10-12T10:26:41.116Z",
+  "devdoc": {
+    "details": "Interface of the ERC20Token implementation.",
+    "kind": "dev",
+    "methods": {
+      "addToBlackList(address)": {
+        "details": "Adds the account to blacklist"
+      },
+      "airDrop(address,uint256)": {
+        "details": "Owner can airdrop the ERC20 tokens to users"
+      },
+      "mint(address,uint256)": {
+        "details": "Mint the ERC20 token to given address"
+      },
+      "pause()": {
+        "details": "Pause the contract"
+      },
+      "removeFromBlackList(address)": {
+        "details": "Removes the account from blacklist"
+      },
+      "unpause()": {
+        "details": "Unpause the contract"
+      },
+      "updateTokenPrice(uint256)": {
+        "details": "update the token price "
+      },
+      "withdraw()": {
+        "details": "Withdraw all the ethers of contract to owner"
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
