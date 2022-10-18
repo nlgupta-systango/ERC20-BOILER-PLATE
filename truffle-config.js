@@ -1,7 +1,9 @@
 require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-const mnemonic = process.env.MNEMONIC;
-const KEY = process.env.KEY;
+const MNEMONIC = process.env.MNEMONIC;
+const POLYGONSCANKEY = process.env.POLYGONSCANKEY;
+const ETHERSCANKEY = process.env.ETHERSCANKEY;
+const INFURA_API_KEY = process.env.INFURA_API_KEY;
 module.exports = {
 
   networks: {
@@ -12,17 +14,26 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
     },
 
+    goerli: {
+      provider: () => {
+        return new HDWalletProvider(MNEMONIC, 'wss://goerli.infura.io/ws/v3/' + INFURA_API_KEY)
+      },
+      network_id: 5, // eslint-disable-line camelcase
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
+
     mumbai: {
       provider: () =>
         new HDWalletProvider(
-          mnemonic,
+          MNEMONIC,
           `https://matic-mumbai.chainstacklabs.com/`
         ),
       network_id: 80001,
       timeoutBlocks: 200,
       skipDryRun: true,
     },
-
+  },
     compilers: {
       solc: {
         version: "0.8.7",
@@ -46,8 +57,9 @@ module.exports = {
     ],
 
     api_keys: {
-      polygonscan: KEY
+      polygonscan: POLYGONSCANKEY,
+      etherscan: ETHERSCANKEY
     }
-  }
-};
+  };
+
 

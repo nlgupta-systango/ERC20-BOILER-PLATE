@@ -34,7 +34,9 @@ NAME=<Place your ERC20 Token Name here>
 SYMBOL=<Place your ERC20 Token Symbol here>
 TOKENPRICE=<Place your ERC20 Token Price here>
 MNEMONIC=<Place your Ethereum address seed phrase here>
-KEY=<Place your API key here>
+POLYGONSCANKEY=<Place your POLYGONSCAN API KEY>
+ETHERSCANKEY=<Place your ETHERSCAN API KEY>
+INFURA_API_KEY=<Place your Infura API KEY>
 ```
 
 ## Commands
@@ -66,8 +68,10 @@ These values will be picked up either from .env file explained above or the envi
 ```js
 require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-const mnemonic = process.env.MNEMONIC;
-const KEY = process.env.KEY;
+const MNEMONIC = process.env.MNEMONIC;
+const POLYGONSCANKEY = process.env.POLYGONSCANKEY;
+const ETHERSCANKEY = process.env.ETHERSCANKEY;
+const INFURA_API_KEY = process.env.INFURA_API_KEY;
 module.exports = {
 
   networks: {
@@ -78,17 +82,26 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
     },
 
+    goerli: {
+      provider: () => {
+        return new HDWalletProvider(MNEMONIC, 'wss://goerli.infura.io/ws/v3/' + INFURA_API_KEY)
+      },
+      network_id: 5, // eslint-disable-line camelcase
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
+
     mumbai: {
       provider: () =>
         new HDWalletProvider(
-          mnemonic,
+          MNEMONIC,
           `https://matic-mumbai.chainstacklabs.com/`
         ),
       network_id: 80001,
       timeoutBlocks: 200,
       skipDryRun: true,
     },
-
+  },
     compilers: {
       solc: {
         version: "0.8.7",
@@ -112,10 +125,10 @@ module.exports = {
     ],
 
     api_keys: {
-      polygonscan: KEY
+      polygonscan: POLYGONSCANKEY,
+      etherscan: ETHERSCANKEY
     }
-  }
-};
+  };
 
 ```
 
@@ -151,6 +164,16 @@ Network Name - mumbai
 - To migrate the contracts 
 
     `truffle migrate --network mumbai`
+
+    - This will use the migrations/2_migrate_ERC20.js file and deploy the RolaCoaster contract.
+
+        This file would use your NAME, SYMBOL and TOKENPRICE  fields from .env file and pass to the smart contract.
+
+Network Name - goerli
+
+- To migrate the contracts 
+
+    `truffle migrate --network goerli`
 
     - This will use the migrations/2_migrate_ERC20.js file and deploy the RolaCoaster contract.
 
