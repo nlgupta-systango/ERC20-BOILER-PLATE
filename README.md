@@ -23,11 +23,24 @@ You'll need node, npm and the Truffle Suite to set up the development environmen
     - Version - 16.13.0
 - [Truffle Suite](https://www.trufflesuite.com/)
     - Version - 5.5.3
-- [Ganache](https://www.npmjs.com/package/ganache-cli)
-    - Version - Ganache CLI v6.12.2 (ganache-core: 2.13.2)
+- [Ganache](https://www.npmjs.com/package/ganache)
+    - Version - ganache v7.4.4 (@ganache/cli: 0.5.4, @ganache/core: 0.5.4)
 
+2. Wallet Setup
 
-2. .env Sample
+You will need a Blockchain wallet (Metamask) to deploy and test these smart contracts.
+
+`Metamask` : -
+          MetaMask is a popular cryptocurrency wallet known for its ease of use, availability on both desktops and mobile devices, the ability to buy, send, and receive cryptocurrency from within the wallet, and collect non-fungible tokens (NFTs) across two blockchains.
+
+- To create a wallet on metamask install the Metamask extension on your web browser.
+- Click on the Metamask extension and select Create a Wallet option from there.
+- Setup a password for your Metamask login (Remember this is your Metamask login password not the account password).
+- Tap to reveal the Secret Recovery Phrase and keep it safe with you.
+- Confirm your Secret Recovery Phrase saved with you to add your account to Metamask.
+- Now you can switch between Ethereum mainnet and other Test Networks.
+
+3. .env Sample
 
 ```cmd
 NAME=<Place your ERC20 Token Name here>
@@ -38,16 +51,29 @@ POLYGONSCANKEY=<Place your POLYGONSCAN API KEY>
 ETHERSCANKEY=<Place your ETHERSCAN API KEY>
 INFURA_API_KEY=<Place your Infura API KEY>
 ```
+- NOTE-1:- SignUp/Login on Infura to get [INFURA_API_KEY](https://www.infura.io/)
+
+- NOTE-2 :- Add metask extension on your browser to get [MNEMONIC](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en)
+
+- NOTE-3:- SignUp/Login on Etherscan to get [ETHERSCAN_API_KEY](https://etherscan.io/register)
 
 ## Commands
 
-1. To install truffle 
- ```console
-     npm install -g truffle
- ```
-2. To install ganache cli
- ```console
-     npm install -g ganache-cli
+1. Truffle Installation command
+
+- `Truffle` : -
+          Truffle is a world-class development environment, testing framework and asset pipeline for blockchains using the Ethereum Virtual Machine (EVM), aiming to make life as a developer easier.
+
+```console
+npm install -g truffle
+``` 
+2. Ganache Installation command
+
+-  `Ganache` : -
+          Ganache is a private Ethereum blockchain environment that allows to you emulate the Ethereum blockchain so that you can interact with smart contracts in your own private blockchain
+
+```console
+npm install ganache --global
 ```
 3. To install the required dependencies for project
  ```console
@@ -62,7 +88,7 @@ INFURA_API_KEY=<Place your Infura API KEY>
 
 ## Truffle Config File
 
-This file would use your Mnemonic key and PolygonScan API KEY to deploy the smart contracts on local network as well Polygon and Test Network. 
+This file would use your Mnemonic key and PolygonScan or Etherscan API KEY and Infura API KEY to deploy the smart contracts on local network as well Polygon and Test Network. 
 These values will be picked up either from .env file explained above or the environment variables of the host system.
 
 ```js
@@ -102,44 +128,42 @@ module.exports = {
       skipDryRun: true,
     },
   },
-    compilers: {
-      solc: {
-        version: "0.8.7",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200
-          }
+  compilers: {
+    solc: {
+      version: "0.8.7",
+      settings: {
+        optimizer: {
+          enabled: true,
+          runs: 200,
         }
       }
-    },
-
-    mocha: {
-      enableTimeouts: false,
-      before_timeout: 300000
-    },
-
-    plugins: [
-      "solidity-coverage",
-      "truffle-plugin-verify"
-    ],
-
-    api_keys: {
-      polygonscan: POLYGONSCANKEY,
-      etherscan: ETHERSCANKEY
     }
-  };
+  },
+
+  mocha: {
+    enableTimeouts: false,
+    before_timeout: 300000,
+  },
+
+  plugins: [
+    "solidity-coverage",
+    "truffle-plugin-verify",
+  ],
+
+  api_keys: {
+    polygonscan: POLYGONSCANKEY,
+    etherscan: ETHERSCANKEY,
+  }
+};
 
 ```
-
-
 ## Deploy On Local Network
 
 Network Name - test
 
 - To run smart contract on test first start
 
-    `ganache-cli`
+    `ganache`
 
     in another terminal
 
@@ -188,12 +212,12 @@ To run the unit test case coverage on the smart contract we have used solidity-c
 
 File              |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
 ------------------|----------|----------|----------|----------|----------------|
- contracts/       |      100 |    90.91 |      100 |      100 |                |
+ contracts/       |      100 |    82.14 |      100 |      100 |                |
   BlackList.sol   |      100 |      100 |      100 |      100 |                |
-  ERC20Token.sol  |      100 |       90 |      100 |      100 |                |
+  ERC20Token.sol  |      100 |    80.77 |      100 |      100 |                |
   IERC20Token.sol |      100 |      100 |      100 |      100 |                |
 ------------------|----------|----------|----------|----------|----------------|
-All files         |      100 |    90.91 |      100 |      100 |                |
+All files         |      100 |    82.14 |      100 |      100 |                |
 
 
 

@@ -17,11 +17,13 @@ import "./BlackList.sol";
 contract ERC20Token is ERC20, Pausable, Ownable, IERC20Token, BlackList{
     
     /**
-        @notice Price of ERC20 Token
+     *   @notice Price of ERC20 Token
      */
     uint256 public tokenPrice;
 
-    // Zero Address
+    /**
+    * Zero Address
+    */ 
     address constant ZERO_ADDRESS = address(0);
 
     /**
@@ -41,22 +43,30 @@ contract ERC20Token is ERC20, Pausable, Ownable, IERC20Token, BlackList{
     * @param to The address to be token minted
     * @param amount Number of the ERC20 tokens to be minted
     */
-    function mint(address to, uint256 amount) external payable override whenNotPaused whenNotBlackListedUser(msg.sender) whenNotBlackListedUser(to) {
+    function mint(address to, uint256 amount) external payable override whenNotPaused whenNotBlackListedUser(to) {
         require(to != ZERO_ADDRESS, "ERC20Token: Cannot mint ERC20Token to Zero Address.");
+        require(!_isBlackListUser(msg.sender), "ERC20Token: Caller address is blacklisted.");
+        require(amount != 0, "ERC20Token: Amount can not be Zero.");
         require(msg.value >= tokenPrice * amount,"ERC20Token: Insufficient balance.");
         _mint(to, amount);
+        emit ERC20Minted(to, amount);
     }
 
     /**
-    * @notice airDrop is use to put the ERC20 tokens to given address
-    * @dev This is the airDrop function. It is used by the owner to airdrop `amount` number of ERC20 tokens to the `to` address respectively.
+    * @notice airDrop is use to put the ERC20 tokens to given addresses
+    * @dev This is the airDrop function. It is used by the owner to airdrop `amount` number of ERC20 tokens to the `account` address respectively.
     * @dev Only the owner can call this function
-    * @param to The address to be airdropped
-    * @param amount The amount of random tokens to be air dropped respectively
+    * @param account The addresses to be airdropped
+    * @param amount The amounts of random tokens to be air dropped respectively
     */
-    function airDrop(address to, uint256 amount) external override onlyOwner whenNotPaused{
-        require(to != ZERO_ADDRESS, "ERC20Token: Cannot airDrop ERC20Token to Zero Address.");
-        _mint(to, amount);
+     function airDrop(address[] calldata account, uint256[] memory amount) external override whenNotPaused onlyOwner {
+        require(account.length == amount.length, "ERC20Token: Incorrect parameter length.");
+        for(uint16 i = 0; i < account.length; i++){
+            if( (!_isBlackListUser(account[i])) && (address(account[i]) != ZERO_ADDRESS) && (amount[i] != 0) ){
+                _mint(account[i], amount[i]);
+                emit ERC20Minted(account[i], amount[i]);
+            }          
+        }
     }
 
     /**
@@ -69,6 +79,7 @@ contract ERC20Token is ERC20, Pausable, Ownable, IERC20Token, BlackList{
         address payable _to = payable(msg.sender);
         bool sent = _to.send(getContractBalance());
         require(sent, "Failed to send Ether");
+        emit EthersWithdraw(_to);
     }
 
     /**
@@ -105,6 +116,7 @@ contract ERC20Token is ERC20, Pausable, Ownable, IERC20Token, BlackList{
     function updateTokenPrice(uint256 newTokenPrice) external override onlyOwner {
         require(tokenPrice != newTokenPrice, "ERC20Token: newTokenPrice is can not be same as current tokenPrice.");
         tokenPrice = newTokenPrice;
+        emit TokenPriceUpdated(newTokenPrice);
     }
 
     /**

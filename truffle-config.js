@@ -34,32 +34,30 @@ module.exports = {
       skipDryRun: true,
     },
   },
-    compilers: {
-      solc: {
-        version: "0.8.7",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200
-          }
+  compilers: {
+    solc: {
+      version: "0.8.7",
+      settings: {
+        optimizer: {
+          enabled: true,
+          runs: 200,
         }
       }
-    },
-
-    mocha: {
-      enableTimeouts: false,
-      before_timeout: 300000
-    },
-
-    plugins: [
-      "solidity-coverage",
-      "truffle-plugin-verify"
-    ],
-
-    api_keys: {
-      polygonscan: POLYGONSCANKEY,
-      etherscan: ETHERSCANKEY
     }
-  };
+  },
 
+  mocha: {
+    enableTimeouts: false,
+    before_timeout: 300000,
+  },
 
+  plugins: [
+    "solidity-coverage",
+    "truffle-plugin-verify",
+  ],
+
+  api_keys: {
+    polygonscan: POLYGONSCANKEY,
+    etherscan: ETHERSCANKEY,
+  }
+};

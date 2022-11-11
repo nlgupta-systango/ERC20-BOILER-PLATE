@@ -8,19 +8,26 @@ pragma solidity ^0.8.7;
 
 contract BlackList {
 
-    /** Mapping between the address and boolean for blacklisting */
+    /** 
+    * @dev Mapping between the address and boolean for blacklisting 
+    */
     mapping (address => bool) public blackList;
 
-    /** Event to trigger the addition of address to blacklist mapping */
+    /** 
+    * @dev Event to trigger the addition of address to blacklist mapping 
+    */
     event AddedToBlackList(address _user);
 
-    /** Event to trigger the removal of address from blacklist mapping */
+    /** 
+    * @dev Event to trigger the removal of address from blacklist mapping 
+    */
     event RemovedFromBlackList(address _user);
     
     /**
-    * This function would add an address to the blacklist mapping
+    * @dev This function would add an address to the blacklist mapping
     * @param user The account to be added to blacklist
-     */
+    * @return true if given address `user` successfully added in blacklist mapping
+    */
     function _addToBlackList(address user) internal virtual returns (bool) {
         blackList[user] = true;
         emit AddedToBlackList(user);
@@ -28,8 +35,9 @@ contract BlackList {
     }
 
     /**
-    * This function would remove an address from the blacklist mapping
+    * @dev This function would remove an address from the blacklist mapping
     * @param user The account to be removed from blacklist
+    * @return true if given address `user` successfully removed from blacklist mapping
     */
     function _removeFromBlackList(address user) internal virtual returns (bool) {
         blackList[user] = false;
@@ -38,14 +46,17 @@ contract BlackList {
         return true;
     }
 
-    /** This function would check an address from the blacklist mapping
+    /** 
+    * @dev This function would check an address from the blacklist mapping
     * @param _user The account to be checked from blacklist mapping
+    * @return true or false if given address `user` in blacklist mapping or not in blacklist mapping respectively
     */
     function _isBlackListUser(address _user) internal virtual returns (bool){
         return blackList[_user];
     }
 
-    /** Modifier to check address from the blacklist mapping
+    /** 
+    * @dev Modifier to check address from the blacklist mapping
     * @param _user The account to be checked from blacklist mapping
     */
     modifier whenNotBlackListedUser(address _user) {
